@@ -21,7 +21,7 @@ func permutations(arr []int) [][]int {
 	res := [][]int{}
 	significantLength := len(arr) / 2
 	t1 := time.Now()
-	memdebug.Print(t1, "sigLen", significantLength)
+	memdebug.Print(t1, "output array is uniques of size", significantLength)
 
 	helper = func(arr []int, n int) {
 		if n == 1 {
@@ -62,27 +62,29 @@ func permutations(arr []int) [][]int {
 }
 
 func main() {
-	debug := os.Getenv("DEBUG") != ""
+	debug := os.Getenv("QUIET") == ""
 	t1 := time.Now()
-	memdebug.Print(t1, "start")
 	arr := []int{1, 2, 3, 4, 5, 6, 7, 8}
-	fmt.Println("// will generate [1 2 3 4],[2 1 3 4],[3 2 1 4]")
+	memdebug.Print(t1, "start", arr)
 	perm := permutations(arr)
 	memdebug.Print(t1, "done permutations", len(perm))
 	t1 = time.Now()
 	if debug {
 		for i := 0; i < int(len(perm)); i++ {
 			if i > 0 {
-				fmt.Print(", ")
+				if i % 16 == 0 {
+					fmt.Println("")
+				} else {
+					fmt.Print(", ")
+				}
 			}
 			fmt.Print(perm[i])
 		}
 		fmt.Println("")
 	}
 	memdebug.Print(t1, "done print results", len(perm))
-	fmt.Println("// Would like to generate only pairs of two and most lovely unique")
 	t1 = time.Now()
-	if debug {
+	if false && debug {
 		for i := 0; i < int(len(perm)); i++ {
 			if i > 0 {
 				if i%24 == 0 {
@@ -95,8 +97,8 @@ func main() {
 				fmt.Print(perm[i][j])
 			}
 		}
+		fmt.Println("")
 	}
-	fmt.Println("")
 	memdebug.Print(t1, "all done")
 
 	// simplify results
