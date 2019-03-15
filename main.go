@@ -37,7 +37,7 @@ func permutations(arr []int)[][]int{
 func main() {
 	t1 := time.Now()
 	memdebug.Print(t1, "start")
-	arr := []int{1, 2, 3, 4, 5, 6, 7}
+	arr := []int{1, 2, 3, 4, 5, 6, 7, 8}
 	fmt.Println("// will generate [1 2 3 4],[2 1 3 4],[3 2 1 4]")
 	perm := permutations(arr)
 	memdebug.Print(t1, "done permutations", len(perm))
@@ -49,14 +49,20 @@ func main() {
 		fmt.Print(perm[i])
 	}
 	fmt.Println("")
-	memdebug.Print(t1, "done print results")
+	memdebug.Print(t1, "done print results", len(perm))
 	fmt.Println("// Would like to generate only pairs of two and most lovely unique")
 	t1 = time.Now()
 	for i := 0; i < int(len(perm)); i++ {
 		if i > 0 {
-			fmt.Print(", ")
+			if i % 16 == 0 {
+				fmt.Println()
+			} else {
+				fmt.Print(", ")
+			}
 		}
-		fmt.Print(perm[i][0], perm[i][1])
+		for j := 0; j < len(arr)/2; j++ {
+			fmt.Print(perm[i][j])
+		}
 	}
 	fmt.Println("")
 	memdebug.Print(t1,"end print")
