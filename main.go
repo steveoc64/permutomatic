@@ -19,7 +19,6 @@ func sliceSame(a,b []int) bool {
 func permutations(arr []int) [][]int {
 	var helper func([]int, int)
 	res := [][]int{}
-	flipflop := true
 	significantLength := len(arr) / 2
 	t1 := time.Now()
 	memdebug.Print(t1, "sigLen", significantLength)
@@ -45,6 +44,7 @@ func permutations(arr []int) [][]int {
 				//memdebug.Print(t1, "IS ALREADY THERE", tmp)
 			}
 		} else {
+			flipflop := true
 			for i := 0; i < n; i++ {
 				helper(arr, n-1)
 				if flipflop {
